@@ -36,6 +36,7 @@ Y_test = test_data_df[['numsum']].values /2000
 test_error_rate = model.evaluate(X_test, Y_test, verbose=1)
 print("Test Error Rate: ", test_error_rate)
 
+# Save the model
 model.save("trained_model.h5")
 print("Model saved")
 
