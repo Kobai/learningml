@@ -19,14 +19,14 @@ model.add(Dense(32, input_dim=4, activation='relu'))
 model.add(Dense(32, activation = 'relu'))
 model.add(Dense(64, activation = 'relu'))
 model.add(Dense(64, activation = 'relu'))
-model.add(Dense(128, activation = 'relu'))
+model.add(Dense(64, activation = 'relu'))
 model.add(Dense(128, activation = 'relu'))
 model.add(Dense(3, activation='linear'))
 
 model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 
 model.fit(
-    X,Y,
+    trainX,trainY,
     epochs = 20,
     verbose = 1
 )
