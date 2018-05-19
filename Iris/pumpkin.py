@@ -28,7 +28,7 @@ model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 model.fit(
     X,Y,
     epochs = 20,
-    verbose = 0
+    verbose = 1
 )
 
 score = model.evaluate(testX, testY, batch_size=128, verbose=1)
