@@ -3,6 +3,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
+import os
+import tensorflowjs as tfjs
 
 df = pd.read_csv("data.csv")
 
@@ -34,3 +36,6 @@ model.fit(
 score = model.evaluate(testX, testY, batch_size=128, verbose=1)
 print("Test score: ", score[0])
 print("Accuracy: ", score[1])
+
+
+tfjs.converters.save_keras_model(model, os.path.dirname(os.path.realpath(__file__)))
