@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 108:
+/***/ 163:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,11 +13,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 108;
+webpackEmptyAsyncContext.id = 163;
 
 /***/ }),
 
-/***/ 149:
+/***/ 204:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -30,18 +30,18 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 149;
+webpackEmptyAsyncContext.id = 204;
 
 /***/ }),
 
-/***/ 193:
+/***/ 248:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tensorflow_tfjs__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tensorflow_tfjs__ = __webpack_require__(350);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -114,26 +114,21 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.predict = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var output, process, index, names, pictures;
-            return __generator(this, function (_a) {
-                if (this.var1 && this.var2 && this.var3 && this.var4) {
-                    output = this.model.predict(__WEBPACK_IMPORTED_MODULE_2__tensorflow_tfjs__["b" /* tensor2d */]([this.var1, this.var2, this.var3, this.var4], [1, 4]));
-                    process = Array.from(output.dataSync()).map(Number);
-                    index = process.indexOf(Math.max.apply(Math, process));
-                    names = ['Iris Setosa', 'Iris Versicolor', 'Iris Virginica'];
-                    pictures = ['http://www.twofrog.com/images/iris38a.jpg',
-                        'https://www.plant-world-seeds.com/images/item_images/000/003/884/large_square/IRIS_VERSICOLOR.JPG?1495391088',
-                        'https://www.fs.fed.us/wildflowers/beauty/iris/Blue_Flag/images/iris_virginica_virginica_lg.jpg'];
-                    this.prediction = names[index];
-                    this.flower = pictures[index].toString();
-                }
-                else {
-                    this.errorToast();
-                }
-                return [2 /*return*/];
-            });
-        });
+        if (this.var1 && this.var2 && this.var3 && this.var4) {
+            var output = this.model.predict(__WEBPACK_IMPORTED_MODULE_2__tensorflow_tfjs__["b" /* tensor2d */]([this.var1, this.var2, this.var3, this.var4], [1, 4]));
+            var process_1 = Array.from(output.dataSync()).map(Number);
+            var index = process_1.indexOf(Math.max.apply(Math, process_1));
+            var names = ['Iris Setosa', 'Iris Versicolor', 'Iris Virginica'];
+            var pictures = ['http://www.twofrog.com/images/iris38a.jpg',
+                'https://www.plant-world-seeds.com/images/item_images/000/003/884/large_square/IRIS_VERSICOLOR.JPG?1495391088',
+                'https://www.fs.fed.us/wildflowers/beauty/iris/Blue_Flag/images/iris_virginica_virginica_lg.jpg'];
+            this.prediction = names[index];
+            this.flower = pictures[index].toString();
+            console.log(this.var1 + "," + this.var2 + "," + this.var3 + "," + this.var4);
+        }
+        else {
+            this.errorToast();
+        }
     };
     HomePage.prototype.errorToast = function () {
         var toast = this.toastCtrl.create({
@@ -145,25 +140,24 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/home/kobai/Programming/tfion/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color=\'primary\'>\n    <ion-title>\n        Iris Prediction\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-header color="primary">{{ prediction  ? prediction : "Iris Setosa"}}</ion-card-header>\n    <img src="{{ flower ? flower : \'http://www.twofrog.com/images/iris38a.jpg\' }}"/>\n    <ion-card-content>\n      <ion-input type="number" [(ngModel)]="var1" placeholder="Sepal Length (ex. 5.1)"></ion-input>\n      <ion-input type="number" [(ngModel)]="var2" placeholder="Sepal Width (ex. 3.5)"></ion-input>\n      <ion-input type="number" [(ngModel)]="var3" placeholder="Petal Length (ex. 1.4)"></ion-input>\n      <ion-input type="number" [(ngModel)]="var4" placeholder="Petal Width (ex. 0.2)"></ion-input>\n      <div class = "center">\n        <button ion-button (click)=\'predict()\'>Submit</button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n'/*ion-inline-end:"/home/kobai/Programming/tfion/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/home/kobai/Programming/learningml/Iris/tfjs-ionic/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color=\'primary\'>\n    <ion-title>\n        Iris Prediction\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-header color="primary">{{ prediction  ? prediction : "Iris Setosa"}}</ion-card-header>\n    <img src="{{ flower ? flower : \'http://www.twofrog.com/images/iris38a.jpg\' }}"/>\n    <ion-card-content>\n      <ion-input type="number" [(ngModel)]="var1" placeholder="Sepal Length (ex. 5.1)"></ion-input>\n      <ion-input type="number" [(ngModel)]="var2" placeholder="Sepal Width (ex. 3.5)"></ion-input>\n      <ion-input type="number" [(ngModel)]="var3" placeholder="Petal Length (ex. 1.4)"></ion-input>\n      <ion-input type="number" [(ngModel)]="var4" placeholder="Petal Width (ex. 0.2)"></ion-input>\n      <div class = "center">\n        <button ion-button (click)="predict()">Submit</button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n</ion-content>'/*ion-inline-end:"/home/kobai/Programming/learningml/Iris/tfjs-ionic/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */]])
     ], HomePage);
     return HomePage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
 
 /***/ }),
 
-/***/ 194:
+/***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(298);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -171,18 +165,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 217:
+/***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(248);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -230,16 +224,16 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 268:
+/***/ 349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(248);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -265,7 +259,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/kobai/Programming/tfion/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/kobai/Programming/tfion/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/kobai/Programming/learningml/Iris/tfjs-ionic/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/kobai/Programming/learningml/Iris/tfjs-ionic/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -276,12 +270,12 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 361:
+/***/ 363:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
 
-},[194]);
+},[275]);
 //# sourceMappingURL=main.js.map
