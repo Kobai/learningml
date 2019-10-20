@@ -67,50 +67,51 @@ def name_to_tensor(s):
   return tensor
 
 #%%
-class RNN(nn.Module):
-  def __init__(self, input_size, hidden_size, output_size):
-    super(RNN, self).__init__()
-    self.hidden_size = hidden_size
-    self.i2h = nn.Linear(input_size+hidden_size, hidden_size)
-    self.i2o = nn.Linear(input_size+hidden_size, output_size)
-    self.softmax = nn.LogSoftmax(dim=1)
+class Model(nn.Module):
+  def __init__(self, input_size, output_size, hidden_dim, n_layers):
+    super(Model, self).__init__()
+    self.hidden_dim = hidden_dim
+    self.n_layers = n_layers
+
+    self.rnn = nn.RNN(input_size, hidden_dim, n_layers, batch_first=True)
+    self.fc = nn.Linear(hidden_dim, output_size)
   
-  def forward(self, input, hidden):
-    combined = torch.cat((input, hidden), 1)
-    hidden = self.i2h(combined)
-    output = self.i2o(combined)
-    output = self.softmax(output)
-    return output, hidden
+  def forward(self, x):
+    hidden = self.init_hidden()
+    out, hidden = self.rnn(x, hidden)
+    out = out.continguous().view(-1, self.hidden_dim) 
+    out = self.fc(out)
+    return out, hidden
   
-  def initHidden(self):
-    return torch.zeros(1, self.hidden_size)
-  
-n_hidden = 128
-rnn = RNN(n_letters, n_hidden, 18)
+  def init_hidden(self):
+    return torch.zeros(1, self.hidden_dim)
+
+rnn = Model(n_letters, 18, 128, 1)
 
 #%%
-criterion = nn.NLLLoss()
-lr = 0.005
+lr = 0.01
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(rnn.parameters(), lr=lr)
 
 def step(X,y):
-  hidden = rnn.initHidden()
-  rnn.zero_grad()
+  hidden = rnn.init_hidden()
+  optimizer.zero_grad()
 
   name_tensor = name_to_tensor(X)
+  print(X)
+  print(name_tensor.size())
   category_tensor = torch.tensor([y], dtype=torch.long)
   
-  for i in range(name_tensor.size()[0]):
-    output, hidden = rnn(name_tensor[i], hidden)
-  
+  output, hidden = rnn(name_tensor)
   loss = criterion(output, category_tensor)
   loss.backward()
-
-  for p in rnn.parameters():
-    p.data.add_(-lr, p.grad.data)
+  optimizer.step()
 
   return output, loss.item()
 
 #%%
+all_loss = []
+
 def get_guess(tensor):
   top_n, top_i = output.topk(1)
   category_i = top_i[0].item()
@@ -118,14 +119,31 @@ def get_guess(tensor):
 
 def train():
   current_loss = 0
-  for idx, (X,y) in enumerate(zip(X_train, y_train)):
-    output, loss = step(X,y)
-    current_loss += loss
-    if idx % 800 == 0:
-      guess, guess_i = get_guess(output) 
-      print(f'{guess} / {cat_dict[str(y)]} Loss: {current_loss/800}')
-      current_loss = 0
+  for i in range(5):
+    for idx, (X,y) in enumerate(zip(X_train, y_train)):
+      output, loss = step(X,y)
+      current_loss += loss
+      if idx % 800 == 0:
+        guess, guess_i = get_guess(output) 
+        print(f'{guess} / {cat_dict[str(y)]} Loss: {current_loss/800}')
+        all_loss.append(current_loss / 400)
+        current_loss = 0
+    print(f'Done epoch({i})')
 
 train()
+
+#%%
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
+plt.figure()
+plt.plot(all_loss)
+plt.show()
+
+#%%
+for epoch in range(1):
+  for X,y in zip(X_train, y_train):
+    step(X,y)
+
 
 #%%
