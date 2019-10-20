@@ -1,2 +1,4 @@
 venv/*
 .vscode/*
+pytorch/data/*
+pytorch/*.zip
